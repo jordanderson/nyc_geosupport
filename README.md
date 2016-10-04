@@ -1,13 +1,13 @@
 # NycGeosupport
 
-New York City is kind enough to publish their [Geosupport Desktop Edition](https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-gde-home.page) library and data, along with a voluminous [User Programming Guide](http://www1.nyc.gov/assets/planning/download/pdf/data-maps/open-data/upg.pdf) demonstrating how to use it. This toolset allows you to build a super-fast (at the moment, I can geocode 2,000 addresses per second on a docker machine running on my Mac) NYC geocoder for your application without needing outside network access.
+New York City is kind enough to publish their [Geosupport Desktop Edition](https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-gde-home.page) shared object library and data, along with a voluminous [User Programming Guide](http://www1.nyc.gov/assets/planning/download/pdf/data-maps/open-data/upg.pdf) demonstrating how to use it. This toolset allows you to build a super-fast (at the moment, I can geocode 2,000 addresses per second on a docker machine running on my Mac) NYC geocoder for your application without needing outside network access.
 
 NycGeosupport is a ruby gem that makes use of the [ffi](https://github.com/ffi/ffi) gem to wrap a more pleasant API around Geosupport Desktop Edition -- more pleasant if you find writing ruby more pleasant than C anyway ;). 
 
 
 ## Usage
 
-NOTE: I could be mistaken, but this will not run on your non-Linux/Unix machine, because the shared object libraries contained in the Geosupport Destop Edition. However, if you're running MacOS (like me) or Windows then [Docker](https://docs.docker.com) to the rescue!
+NOTE: I could be mistaken, but this will not run on your non-Linux machine, because the shared object libraries contained in the Geosupport Desktop Edition are built on Linux. However, if you're running MacOS (like me) or Windows then [Docker](https://docs.docker.com) to the rescue! (Though I guess if you're running Windows there is a native version of Geosupport Desktop Edition already.) 
 
 The Rakefile in this repository has some helpful rake commands for building, testing, and running the nyc_geosupport gem inside a docker container:  
 ```
@@ -43,7 +43,7 @@ Here's an example of calling a geosupport function in the console:
 
 As you can see, you can instantiate a geosupport client with `NycGeosupport.client` and use the `run` method to query geosupport. The response can be viewed as a Hash by calling the response method.
 
-For some other examples, check out nyc_geosupport_test.rb. 
+For some other examples, check out [nyc_geosupport_test.rb](https://github.com/jordanderson/nyc_geosupport/blob/master/test/nyc_geosupport_test.rb). 
 
 
 ## To Do
