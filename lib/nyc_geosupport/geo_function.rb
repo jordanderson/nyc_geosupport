@@ -76,17 +76,14 @@ module NycGeosupport
 
       when NycGeosupport::GeoFunction
         @geo_function_code = function.geo_function_code
-        return true
 
       when String, Symbol
         if found_function = GEO_FUNCTIONS[function.to_s]
           @geo_function_code = function.to_s
-          return true
         end
 
         if found_function = GEO_FUNCTION_SYMBOLS[function.to_sym]
           @geo_function_code = found_function
-          return true
         end
 
       else

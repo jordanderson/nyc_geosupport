@@ -16,19 +16,21 @@ class NycGeosupportTest < Minitest::Test
 
     nyc.run(house_number_display_format: "100", street_name1: "Broadway", b10sc1: "1")
 
-    puts nyc.work_area_1.geosupport_function_code
+    assert_equal "1", nyc.response[:work_area_1][:geosupport_function_code]
+    assert_equal "00", nyc.response[:work_area_1][:geosupport_return_code]
 
     nyc.geo_function = :basic_property
-    nyc.run(house_number_display_format: "350", street_name1: "5th Ave", b10sc1: "3")
+    nyc.run(house_number_display_format: "350", street_name1: "5th Ave", b10sc1: "1")
 
-    puts n.work_area_1.to_h
-    puts n.work_area_2.to_h
+    assert_equal "00", nyc.response[:work_area_1][:geosupport_return_code]
+    assert_equal({borough: "1", block: "00835", lot: "0041"}, nyc.response[:work_area_2][:bbl])
   end
 
   def test_extended_mode
-    n = NycGeosupport.client(extended_mode: true, debug: true)
+    nyc = NycGeosupport.client(extended_mode: true, debug: true)
 
-    n.run(house_number_display_format: "100", street_name1: "Broadway", b10sc1: "1")
+    nyc.run(house_number_display_format: "100", street_name1: "Broadway", b10sc1: "1")
 
+    assert_equal 300, nyc.work_area_2.length
   end
 end
